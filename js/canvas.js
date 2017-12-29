@@ -9,8 +9,10 @@ window.onload = function () {
   })()
   // canvas
   var cv = document.querySelector('#myCanvas')
-  cv.width = window.innerWidth - 50
-  cv.height = window.innerHeight - 50
+  // cv.width = window.innerWidth - 50
+  // cv.height = window.innerHeight - 50
+  cv.height = 500
+  cv.width = 500
   var c = cv.getContext('2d')
   // console.dir(c)
   // Line
@@ -53,78 +55,203 @@ window.onload = function () {
   //   c.stroke()
   // }
   // perform action on mouse move
-  var mousePosition = {
-    x: undefined,
-    y: undefined
-  }
-  var maxRadius = 80
-  var colorArray = ['#04BBBF', '#D2D945', '#FCC23F', '#FF694F', 'purple']
-  // console.log(randomColor)
-  cv.addEventListener('mousemove', function (e) {
-    mousePosition.x = e.x
-    mousePosition.y = e.y
-  })
-  window.addEventListener('resize', function () {
-    cv.width = window.innerWidth - 50
-    cv.height = window.innerHeight - 50
-    init()
-  })
-  // Moving Animation
-  function Circle (x, y, dx, dy, radius) {
-    this.x = x
-    this.y = y
-    this.dx = dx
-    this.dy = dy
-    this.radius = radius
-    this.minradius = radius
-    this.color = colorArray[Math.floor(Math.random() * colorArray.length)]
-    this.draw = function () {
-      c.beginPath()
-      c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true)
-      c.strokeStyle = 'blue'
-      c.stroke()
-      // c.fillStyle = colorArray[Math.floor(Math.random() * colorArray.length)]
-      c.fillStyle = this.color
-      c.fill()
-    }
-    this.update = function () {
-      if (this.x + this.radius > cv.width || this.x - this.radius < 0) {
-        this.dx = -this.dx
-      }
-      if (this.y + this.radius > cv.height || this.y - this.radius < 0) {
-        this.dy = -this.dy
-      }
-      this.x += this.dx
-      this.y += this.dy
-      if (mousePosition.x - this.x < 50 && mousePosition.x - this.x > -50 && mousePosition.y - this.y < 50 && mousePosition.y - this.y > -50) {
-        if (this.radius < maxRadius) {
-          this.radius += 1
-        }
-      } else if (this.radius > this.minradius) {
-        this.radius -= 1
-      }
-      this.draw()
-    }
-  }
-  var circleArray = []
-  function init () {
-    circleArray = []
-    for (var i = 0; i < 1000; i++) {
-      var cirradius = Math.random() * 3 + 1
-      var x = Math.random() * (cv.width - cirradius * 2) + cirradius
-      var y = Math.random() * (cv.height - cirradius * 2) + cirradius
-      var dx = (Math.random() - 0.5)
-      var dy = (Math.random() - 0.5)
-      circleArray.push(new Circle(x, y, dx, dy, cirradius))
-    }
-  }
-  init()
-  var animations = function () {
-    window.requestAnimationFrame(animations)
+  // Animating bolls
+  // var mousePosition = {
+  //   x: undefined,
+  //   y: undefined
+  // }
+  // var maxRadius = 80
+  // var colorArray = ['#04BBBF', '#D2D945', '#FCC23F', '#FF694F', 'purple']
+  // // console.log(randomColor)
+  // cv.addEventListener('mousemove', function (e) {
+  //   mousePosition.x = e.x
+  //   mousePosition.y = e.y
+  // })
+  // window.addEventListener('resize', function () {
+  //   cv.width = window.innerWidth - 50
+  //   cv.height = window.innerHeight - 50
+  //   init()
+  // })
+  // // Moving Animation
+  // function Circle (x, y, dx, dy, radius) {
+  //   this.x = x
+  //   this.y = y
+  //   this.dx = dx
+  //   this.dy = dy
+  //   this.radius = radius
+  //   this.minradius = radius
+  //   this.color = colorArray[Math.floor(Math.random() * colorArray.length)]
+  //   this.draw = function () {
+  //     c.beginPath()
+  //     c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true)
+  //     c.strokeStyle = 'blue'
+  //     c.stroke()
+  //     // c.fillStyle = colorArray[Math.floor(Math.random() * colorArray.length)]
+  //     c.fillStyle = this.color
+  //     c.fill()
+  //   }
+  //   this.update = function () {
+  //     if (this.x + this.radius > cv.width || this.x - this.radius < 0) {
+  //       this.dx = -this.dx
+  //     }
+  //     if (this.y + this.radius > cv.height || this.y - this.radius < 0) {
+  //       this.dy = -this.dy
+  //     }
+  //     this.x += this.dx
+  //     this.y += this.dy
+  //     if (mousePosition.x - this.x < 50 && mousePosition.x - this.x > -50 && mousePosition.y - this.y < 50 && mousePosition.y - this.y > -50) {
+  //       if (this.radius < maxRadius) {
+  //         this.radius += 1
+  //       }
+  //     } else if (this.radius > this.minradius) {
+  //       this.radius -= 1
+  //     }
+  //     this.draw()
+  //   }
+  // }
+  // var circleArray = []
+  // function init () {
+  //   circleArray = []
+  //   for (var i = 0; i < 1000; i++) {
+  //     var cirradius = Math.random() * 3 + 1
+  //     var x = Math.random() * (cv.width - cirradius * 2) + cirradius
+  //     var y = Math.random() * (cv.height - cirradius * 2) + cirradius
+  //     var dx = (Math.random() - 0.5)
+  //     var dy = (Math.random() - 0.5)
+  //     circleArray.push(new Circle(x, y, dx, dy, cirradius))
+  //   }
+  // }
+  // init()
+  // var animations = function () {
+  //   window.requestAnimationFrame(animations)
+  //   c.clearRect(0, 0, cv.width, cv.height)
+  //   for (var i = 0; i < circleArray.length; i++) {
+  //     circleArray[i].update()
+  //   }
+  // }
+  // animations()
+  // animate Balls finish
+  // practice
+  // c.moveTo(0, 0)
+  // c.lineTo(100, 100)
+  // c.moveTo(100, 100)
+  // c.lineTo(0, 200)
+  // c.moveTo(0, 200)
+  // c.lineTo(100, 300)
+  // c.moveTo(100, 300)
+  // c.lineTo(0, 400)
+  // c.moveTo(0, 400)
+  // c.lineTo(100, 500)
+  // c.moveTo(100, 500)
+  // c.lineTo(200, 400)
+  // c.moveTo(200, 400)
+  // c.lineTo(100, 300)
+  // c.moveTo(200, 400)
+  // c.lineTo(300, 500)
+  // c.moveTo(100, 100)
+  // c.lineTo(200, 0)
+  // c.moveTo(100, 100)
+  // c.lineTo(200, 200)
+  // c.moveTo(200, 200)
+  // c.lineTo(100, 300)
+  // c.moveTo(200, 0)
+  // c.lineTo(300, 100)
+  // c.moveTo(300, 100)
+  // c.lineTo(200, 200)
+  // c.moveTo(300, 100)
+  // c.lineTo(400, 0)
+  // c.moveTo(300, 500)
+  // c.lineTo(400, 400)
+  // c.moveTo(400, 400)
+  // c.lineTo(300, 300)
+  // c.moveTo(300, 300)
+  // c.lineTo(200, 400)
+  // c.moveTo(300, 300)
+  // c.lineTo(200, 200)
+  // c.moveTo(300, 100)
+  // c.lineTo(400, 200)
+  // c.moveTo(400, 200)
+  // c.lineTo(300, 300)
+  // c.moveTo(400, 400)
+  // c.lineTo(500, 500)
+  // c.moveTo(400, 200)
+  // c.lineTo(500, 300)
+  // c.moveTo(500, 300)
+  // c.lineTo(400, 400)
+  // c.moveTo(400, 0)
+  // c.lineTo(500, 100)
+  // c.moveTo(500, 100)
+  // c.lineTo(400, 200)
+  // c.strokeStyle = 'green'
+  // c.stroke()
+  // // arcs
+  // var Arc = function (x, y, radius, startPos, endPos) {
+  //   this.x = x
+  //   this.y = y
+  //   this.radius = radius
+  //   this.startPos = startPos
+  //   this.endPos = endPos
+  //   this.draw = function () {
+  //     c.beginPath()
+  //     c.arc(this.x, this.y, this.radius, this.startPos, this.endPos)
+  //     c.strokeStyle = 'green'
+  //     c.fillStyle = '#555'
+  //     c.fill()
+  //     c.stroke()
+  //   }
+  // }
+  // var arc1 = new Arc(100, 200, 40, 0, Math.PI * 2)
+  // arc1.draw()
+  // var arc2 = new Arc(200, 100, 40, 0, Math.PI * 2)
+  // arc2.draw()
+  // var arc3 = new Arc(200, 300, 40, 0, Math.PI * 2)
+  // arc3.draw()
+  // var arc4 = new Arc(300, 200, 40, 0, Math.PI * 2)
+  // arc4.draw()
+  // var arc5 = new Arc(300, 400, 40, 0, Math.PI * 2)
+  // arc5.draw()
+  // var arc6 = new Arc(400, 300, 40, 0, Math.PI * 2)
+  // arc6.draw()
+  // var arc7 = new Arc(400, 100, 40, 0, Math.PI * 2)
+  // arc7.draw()
+  // var arc8 = new Arc(100, 400, 40, 0, Math.PI * 2)
+  // arc8.draw()
+  // finish
+  // practice 2
+  var x = Math.random() * cv.width
+  var y = Math.random() * cv.height
+  var dx = 3
+  var dy = 3
+  var radius = 30
+  function name () {
+    window.requestAnimationFrame(name)
     c.clearRect(0, 0, cv.width, cv.height)
-    for (var i = 0; i < circleArray.length; i++) {
-      circleArray[i].update()
+    c.beginPath()
+    c.arc(x, y, radius, 0, Math.PI * 2)
+    c.fillStyle = 'lightblue'
+    c.strokeStyle = 'blue'
+    c.fill()
+    c.stroke()
+    if (x >= cv.width - radius || x < 0 + radius) {
+      dx = -dx
     }
+    if (y >= cv.height - radius || y < 0 + radius) {
+      dy = -dy
+    }
+    x += dx
+    y += dy
   }
-  animations()
+  name()
+  // for (var i = 0; i < 100; i++) {
+  //   var color = ['red', 'green', 'blue', 'skyblue', 'lightgray', 'lightblue']
+  //   // console.log(Math.floor(Math.random() * color.length))
+  //   var x = Math.random() * cv.width
+  //   var y = Math.random() * cv.height
+  //   c.beginPath()
+  //   c.arc(x, y, 30, 0, Math.PI * 2)
+  //   c.fillStyle = color[Math.floor(Math.random() * color.length)]
+  //   c.strokeStyle = 'blue'
+  //   c.fill()
+  //   c.stroke()
+  // }
 }
