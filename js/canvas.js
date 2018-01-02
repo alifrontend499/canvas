@@ -10,9 +10,9 @@ window.onload = function () {
   // canvas
   var cv = document.querySelector('#myCanvas')
   // cv.width = window.innerWidth - 50
-  // cv.height = window.innerHeight - 50
-  cv.height = 500
   cv.width = 500
+  cv.height = window.innerHeight - 45
+  // cv.height = window.innerHeight
   var c = cv.getContext('2d')
   // console.dir(c)
   // Line
@@ -218,30 +218,62 @@ window.onload = function () {
   // arc8.draw()
   // finish
   // practice 2
-  var x = Math.random() * cv.width
-  var y = Math.random() * cv.height
-  var dx = 3
-  var dy = 3
-  var radius = 30
-  function name () {
-    window.requestAnimationFrame(name)
-    c.clearRect(0, 0, cv.width, cv.height)
-    c.beginPath()
-    c.arc(x, y, radius, 0, Math.PI * 2)
-    c.fillStyle = 'lightblue'
-    c.strokeStyle = 'blue'
-    c.fill()
-    c.stroke()
-    if (x >= cv.width - radius || x < 0 + radius) {
-      dx = -dx
+  var Circles = function (x, y, radius, dx, dy) {
+    this.x = x
+    this.y = y
+    this.radius = radius
+    this.dx = dx
+    this.dy = dy
+    this.draw = function () {
+      c.beginPath()
+      c.arc(this.x, this.y, this.radius, 0, Math.PI * 2)
+      c.fillStyle = 'lightblue'
+      c.strokeStyle = 'blue'
+      c.fill()
+      c.stroke()
     }
-    if (y >= cv.height - radius || y < 0 + radius) {
-      dy = -dy
+    this.update = function () {
+      if (this.x >= cv.width - this.radius || this.x < 0 + this.radius) {
+        this.dx = -this.dx
+      }
+      if (this.y >= cv.height - this.radius || this.y < 0 + this.radius) {
+        this.dy = -this.dy
+      }
+      this.x += this.dx
+      this.y += this.dy
+      this.draw()
     }
-    x += dx
-    y += dy
   }
-  name()
+  var radius = 30
+  var x = (Math.random() * cv.width) + radius * 2 - radius
+  console.log(x)
+  var y = (Math.random() * cv.height) + radius * 2 - radius
+  c.beginPath()
+  c.arc(x, y, radius, 0, Math.PI * 2)
+  c.fillStyle = 'lightblue'
+  c.strokeStyle = 'blue'
+  c.fill()
+  c.stroke()
+  // console.log(newData)
+  // var circlesArray = []
+  // for (var i = 0; i < 100; i++) {
+  //   var radius = 30
+  //   var x = (Math.random() * cv.width - radius * 2) + radius
+  //   // console.log(x)
+  //   var y = (Math.random() * cv.height - radius * 2) + radius
+  //   var dx = (Math.random() * -0.5) * 8
+  //   var dy = (Math.random() * -0.5) * 8
+  //   circlesArray.push(new Circles(x, y, radius, dx, dy))
+  // }
+  // console.log(circlesArray)
+  // function name () {
+  //   window.requestAnimationFrame(name)
+  //   c.clearRect(0, 0, cv.width, cv.height)
+  //   for (var i = 0; i < circlesArray.length; i++) {
+  //     circlesArray[i].update()
+  //   }
+  // }
+  // name()
   // for (var i = 0; i < 100; i++) {
   //   var color = ['red', 'green', 'blue', 'skyblue', 'lightgray', 'lightblue']
   //   // console.log(Math.floor(Math.random() * color.length))
